@@ -19,15 +19,17 @@
       const timeout = setTimeout(() => {
         if (!document.documentElement.dataset.theband) {
           boot.textContent = "THEBAND / RUNTIME FAILED";
-          boot.title = "The app module did not start.";
+          boot.style.fontSize = "12px";
         }
       }, 2000);
       import("./src/main.ts").catch((error) => {
         clearTimeout(timeout);
         const message = error instanceof Error ? error.message : String(error);
         if (boot) {
-          boot.textContent = "THEBAND / ERROR";
-          boot.title = message;
+          boot.textContent = "THEBAND / ERROR: " + message;
+          boot.style.fontSize = "12px";
+          boot.style.letterSpacing = "0.04em";
+          boot.style.wordBreak = "break-word";
         }
         console.error("THEBAND boot failed:", error);
       });
