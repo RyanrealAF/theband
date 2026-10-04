@@ -14,25 +14,6 @@
   </head>
   <body>
     <main id="app"><div id="boot">THEBAND / LOADING</div></main>
-    <script type="module">
-      const boot = document.getElementById("boot");
-      const timeout = setTimeout(() => {
-        if (!document.documentElement.dataset.theband) {
-          boot.textContent = "THEBAND / RUNTIME FAILED";
-          boot.style.fontSize = "12px";
-        }
-      }, 2000);
-      import("./src/main.ts").catch((error) => {
-        clearTimeout(timeout);
-        const message = error instanceof Error ? error.message : String(error);
-        if (boot) {
-          boot.textContent = "THEBAND / ERROR: " + message;
-          boot.style.fontSize = "12px";
-          boot.style.letterSpacing = "0.04em";
-          boot.style.wordBreak = "break-word";
-        }
-        console.error("THEBAND boot failed:", error);
-      });
-    </script>
+    <script type="module" src="./src/main.ts"></script>
   </body>
 </html>
