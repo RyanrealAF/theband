@@ -14,8 +14,9 @@ canvas.height = 960;
 canvas.setAttribute("aria-label", "THEBAND animated scene");
 app.appendChild(canvas);
 
-const ctx = canvas.getContext("2d");
-if (!ctx) throw new Error("THEBAND: Canvas 2D is unavailable");
+const context = canvas.getContext("2d");
+if (!context) throw new Error("THEBAND: Canvas 2D is unavailable");
+const ctx: CanvasRenderingContext2D = context;
 
 const analyzer = new SyntheticStemAnalyzer();
 const start = performance.now();
