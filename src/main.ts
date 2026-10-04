@@ -3,6 +3,8 @@ import { SyntheticStemAnalyzer } from "./analysis/StemAnalyzer";
 import { renderScene } from "./scene";
 import type { BandState, MusicalEvent } from "./types";
 
+document.documentElement.dataset.theband = "running";
+
 const app = document.querySelector<HTMLElement>("#app");
 if (!app) throw new Error("THEBAND: #app was not found");
 
