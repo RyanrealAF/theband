@@ -9,11 +9,28 @@
       html,body{margin:0;min-height:100%;background:#050505;color:#eee}
       body{min-height:100vh;display:grid;place-items:center}
       #app{width:min(92vw,540px);aspect-ratio:9/16;display:grid;place-items:center;border:1px solid #292929}
-      #boot{font:700 18px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.18em;color:#b54a32}
+      #boot{font:700 18px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.18em;color:#b54a32;text-align:center;padding:24px}
     </style>
   </head>
   <body>
-    <main id="app"><div id="boot">THEBAND / BOOTING</div></main>
-    <script type="module" src="./src/main.ts"></script>
+    <main id="app"><div id="boot">THEBAND / LOADING</div></main>
+    <script type="module">
+      const boot = document.getElementById("boot");
+      const timeout = setTimeout(() => {
+        if (!document.documentElement.dataset.theband) {
+          boot.textContent = "THEBAND / RUNTIME FAILED";
+          boot.title = "The app module did not start.";
+        }
+      }, 2000);
+      import("./src/main.ts").catch((error) => {
+        clearTimeout(timeout);
+        const message = error instanceof Error ? error.message : String(error);
+        if (boot) {
+          boot.textContent = "THEBAND / ERROR";
+          boot.title = message;
+        }
+        console.error("THEBAND boot failed:", error);
+      });
+    </script>
   </body>
 </html>
