@@ -1,0 +1,2 @@
+export interface AudioFeatures {level:number;low:number;mid:number;high:number;onset:number;}
+export function extractFeatures(analyser:AnalyserNode,previousLevel=0):AudioFeatures{const data=new Float32Array(analyser.fftSize);analyser.getFloatTimeDomainData(data);let sum=0;for(const sample of data)sum+=sample*sample;const level=Math.min(1,Math.sqrt(sum/data.length)*3);const onset=Math.max(0,Math.min(1,(level-previousLevel)*8));return {level,low:level,mid:level,high:level,onset};}
